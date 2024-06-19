@@ -1,0 +1,7 @@
+my_tupple = (1,2,3,4,5,3)
+index = my_tupple.index(3)
+print("The index of 3 is : ",index)
+count = my_tupple.count(3)
+print("The count of 3 is : ",count)
+lenght = len(my_tupple)
+print("The length of the tuple is : ",lenght)
