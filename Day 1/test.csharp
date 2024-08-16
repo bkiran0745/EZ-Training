@@ -1,0 +1,77 @@
+using System;
+
+public class UserMainCode
+{
+    public static string userIdGeneration(string input1, string input2, int input3, int input4)
+    {
+        string lastName = input2;
+        string pin = input3.ToString(); 
+        int n = input4;
+        string smallerName, longerName;
+        
+        if (firstName.Length < lastName.Length)
+        {
+            smallerName = firstName;
+            longerName = lastName;
+        }
+        else if (firstName.Length > lastName.Length)
+        {
+            smallerName = lastName;
+            longerName = firstName;
+        }
+        else
+        {
+            // If lengths are equal, choose based on alphabetical order
+            if (string.Compare(firstName, lastName, StringComparison.Ordinal) < 0)
+            {
+                smallerName = firstName;
+                longerName = lastName;
+            }
+            else
+            {
+                smallerName = lastName;
+                longerName = firstName;
+            }
+        }
+        if (n > pin.Length)
+        {
+            throw new ArgumentException("N is greater than the length of PIN.");
+        }
+        
+        char digitFromLeft = pin[n - 1]; 
+        char digitFromRight = pin[pin.Length - n];
+        string userId = $"{longerName[0]}{smallerName}{digitFromLeft}{digitFromRight}";
+
+        // Step 3: Toggle the case of the user-id
+        string toggledUserId = ToggleCase(userId);
+
+        return toggledUserId;
+    }
+
+    private static string ToggleCase(string input)
+    {
+        char[] buffer = input.ToCharArray();
+        
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            char c = buffer[i];
+            if (char.IsUpper(c))
+            {
+                buffer[i] = char.ToLower(c);
+            }
+            else if (char.IsLower(c))
+            {
+                buffer[i] = char.ToUpper(c);
+            }
+        }
+        
+        return new string(buffer);
+    }
+}
+public class Program
+{
+    public static void Main()
+    {
+        string result = UserMainCode.userIdGeneration("John", "Doe", 123456, 3);
+        Console.WriteLine(result); 
+}
